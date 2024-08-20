@@ -1,5 +1,5 @@
 
-parser.tab.h
-parser.tab.c
-a.out
-lex.yy.c
+./assignment/parser.tab.h
+./assignment/parser.tab.c
+./assignment/a.out
+./lex.yy.c
