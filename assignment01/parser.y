@@ -24,16 +24,16 @@ program :
 ;
 
 expression:
-    SECTION OB DATA CB {printf("#%s",$3);}
-|   SUBSECTION OB DATA CB {printf("##%s",$3);}
-|   SUBSUBSECTION OB DATA CB {printf("##%s",$3);}
-|   ITALIC OB DATA CB {printf("*%s*",$3);}
-|   BOLD OB DATA CB {printf("** %s **",$3);}
-|   HREF OB LINK CB OB DATA CB {printf("[%s](%s)",$6,$3);}
-|   HRULE {printf("---");}
-|   PAR {printf("\n");}
-|   DATA {printf("%s",$1);}
-|   EOL {printf("\n");}
+    SECTION OB DATA CB                  {printf("#%s",$3);}
+|   SUBSECTION OB DATA CB               {printf("##%s",$3);}
+|   SUBSUBSECTION OB DATA CB            {printf("##%s",$3);}
+|   ITALIC OB DATA CB                   {printf("*%s*",$3);}
+|   BOLD OB DATA CB                     {printf("** %s **",$3);}
+|   HREF OB LINK CB OB DATA CB          {printf("[%s](%s)",$6,$3);}
+|   HRULE                               {printf("---");}
+|   PAR                                 {printf("\n");}
+|   DATA                                {printf("%s",$1);}
+|   EOL                                 {printf("\n");}
 ;
 
 
