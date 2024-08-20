@@ -56,22 +56,19 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     SECTION = 258,                 /* SECTION  */
     SUBSECTION = 259,              /* SUBSECTION  */
-    BOLD = 260,                    /* BOLD  */
-    ITALICS = 261,                 /* ITALICS  */
-    HRULE = 262,                   /* HRULE  */
-    PARAGRAPH = 263,               /* PARAGRAPH  */
-    VERBATIM = 264,                /* VERBATIM  */
-    BEGIN_VERBATIM = 265,          /* BEGIN_VERBATIM  */
-    END_VERBATIM = 266,            /* END_VERBATIM  */
-    HYPERLINK = 267,               /* HYPERLINK  */
-    IMAGE = 268,                   /* IMAGE  */
-    BEGIN_ITEMIZE = 269,           /* BEGIN_ITEMIZE  */
-    END_ITEMIZE = 270,             /* END_ITEMIZE  */
-    BEGIN_ENUMERATE = 271,         /* BEGIN_ENUMERATE  */
-    END_ENUMERATE = 272,           /* END_ENUMERATE  */
-    BEGIN_TABLE = 273,             /* BEGIN_TABLE  */
-    END_TABLE = 274,               /* END_TABLE  */
-    TEXT = 275                     /* TEXT  */
+    SUBSUBSECTION = 260,           /* SUBSUBSECTION  */
+    OB = 261,                      /* OB  */
+    CB = 262,                      /* CB  */
+    OSB = 263,                     /* OSB  */
+    CSB = 264,                     /* CSB  */
+    BOLD = 265,                    /* BOLD  */
+    ITALIC = 266,                  /* ITALIC  */
+    EOL = 267,                     /* EOL  */
+    HRULE = 268,                   /* HRULE  */
+    PAR = 269,                     /* PAR  */
+    HREF = 270,                    /* HREF  */
+    DATA = 271,                    /* DATA  */
+    LINK = 272                     /* LINK  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -80,12 +77,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 9 "parser.y"
+#line 7 "parser.y"
 
-    ASTNode* node;
-    char* text;
+    char* data;
+    char* sys;
 
-#line 89 "parser.tab.h"
+#line 86 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
