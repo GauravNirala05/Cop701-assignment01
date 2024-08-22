@@ -15,48 +15,49 @@ void yyerror(const char *s)
     printf("ERROR : %s \n", s);
 }
 
-string Traverse(Tree *head, string s)
+string Traverse(Tree *head)
 {
+    string s = "";
     if (head != NULL)
     {
         // cout<<head->data<<endl;
         if (head->dtype == D_SECTION)
         {
             s += "#";
-            s += string(Traverse(head->child, s));
-            s += string(Traverse(head->next, s));
+            s += string(Traverse(head->child));
+            s += string(Traverse(head->next));
         }
         if (head->dtype == D_SUB_SECTION)
         {
             s += "##";
-            Traverse(head->child, s);
-            Traverse(head->next, s);
+            s = s + Traverse(head->child);
+            s = s + Traverse(head->next);
         }
         if (head->dtype == D_SUBSUB_SECTION)
         {
             s += "###";
-            Traverse(head->child, s);
-            Traverse(head->next, s);
+            s += string(Traverse(head->child));
+            s += string(Traverse(head->next));
         }
         if (head->dtype == D_ITALIC)
         {
             s += "*";
-            Traverse(head->child, s);
+            s += Traverse(head->child);
             s += "*\n";
-            Traverse(head->next, s);
+            s += Traverse(head->next);
         }
         if (head->dtype == D_BOLD)
         {
             s += "***";
-            Traverse(head->child, s);
+            s += Traverse(head->child);
             s += "***\n";
-            Traverse(head->next, s);
+            s += Traverse(head->next);
         }
         if (head->dtype == D_NEWLINE)
         {
             s += "\n";
-            Traverse(head->child, s);
-            Traverse(head->next, s);
+            s += string(Traverse(head->child));
+            s += string(Traverse(head->next));
         }
         if (head->dtype == D_INFORMATION)
         {
@@ -87,7 +88,7 @@ int main(int arg, char *args[])
         string result = "";
         if (root->dtype == PROGRAM_BEGINING)
         {
-            result = Traverse(root->next, result);
+            result = Traverse(root->next);
         }
         cout << result;
     }
