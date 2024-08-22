@@ -71,7 +71,7 @@ int main(int arg, char *args[])
 {
     if (arg < 2)
     {
-        cout << "ERROR : Enter 2 args to run <compiler> and <input_file> --> (e.g ./latex2md test.tex)\n";
+        cout << "ERROR : Enter 2 args to run <compiler> and <input_file> --> (e.g ./latex2md.out test.tex)\n";
         return 0;
     }
     else
