@@ -8,69 +8,87 @@ extern int yyparse();
 
 Tree *root;
 
+extern FILE *yyin;
+
 void yyerror(const char *s)
 {
     printf("ERROR : %s \n", s);
 }
 
-void Traverse(Tree *head)
+string Traverse(Tree *head, string s)
 {
     if (head != NULL)
     {
         // cout<<head->data<<endl;
         if (head->dtype == D_SECTION)
         {
-            cout << "#";
-            Traverse(head->child);
-            Traverse(head->next);
+            s += "#";
+            s += string(Traverse(head->child, s));
+            s += string(Traverse(head->next, s));
         }
         if (head->dtype == D_SUB_SECTION)
         {
-            cout << "##";
-            Traverse(head->child);
-            Traverse(head->next);
+            s += "##";
+            Traverse(head->child, s);
+            Traverse(head->next, s);
         }
         if (head->dtype == D_SUBSUB_SECTION)
         {
-            cout << "###";
-            Traverse(head->child);
-            Traverse(head->next);
+            s += "###";
+            Traverse(head->child, s);
+            Traverse(head->next, s);
         }
         if (head->dtype == D_ITALIC)
         {
-            cout << "*";
-            Traverse(head->child);
-            cout << "*\n";
-            Traverse(head->next);
+            s += "*";
+            Traverse(head->child, s);
+            s += "*\n";
+            Traverse(head->next, s);
         }
         if (head->dtype == D_BOLD)
         {
-            cout << "***";
-            Traverse(head->child);
-            cout << "***\n";
-            Traverse(head->next);
+            s += "***";
+            Traverse(head->child, s);
+            s += "***\n";
+            Traverse(head->next, s);
         }
         if (head->dtype == D_NEWLINE)
         {
-            cout << endl;
-            Traverse(head->child);
-            Traverse(head->next);
+            s += "\n";
+            Traverse(head->child, s);
+            Traverse(head->next, s);
         }
         if (head->dtype == D_INFORMATION)
         {
-            cout << head->data;
+            s += string(head->data);
         }
+        return s;
     }
+    return s;
 }
 
-int main()
+int main(int arg, char *args[])
 {
-    yyparse();
-    cout << "PRINTING AST TREE : " << endl;
-    printTree(root, 0);
-
-    if (root->dtype == PROGRAM_BEGINING)
+    if (arg < 2)
     {
-        Traverse(root->next);
+        cout << "ERROR : Enter 2 args to run <compiler> and <input_file> --> (e.g ./latex2md test.tex)\n";
+        return 0;
+    }
+    else
+    {
+        yyin = fopen(args[1], "r");
+        do
+        {
+            yyparse();
+        } while (!feof(yyin));
+
+        cout << "PRINTING AST TREE : " << endl;
+        printTree(root, 0);
+        string result = "";
+        if (root->dtype == PROGRAM_BEGINING)
+        {
+            result = Traverse(root->next, result);
+        }
+        cout << result;
     }
 }
