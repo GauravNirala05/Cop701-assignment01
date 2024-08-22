@@ -2,23 +2,14 @@
 %{
 #include<stdio.h>
 #include<iostream>
+#include "ast.h"
 using namespace std;
-int yylex();
-struct Tree{
-    string data;
-    struct Tree* child;
-    struct Tree* next;
-};
-void printTree(struct Tree* head){
-    if(head!=NULL){
-    cout<<head->data<<" : \n";
-    printTree(head->child);
-    printTree(head->next);
-    }
-}
-struct Tree* root;
 
-void yyerror(const char* s);
+extern int yylex();
+
+extern Tree* root;
+
+extern void yyerror(const char* s);
 
 %}
 
@@ -30,13 +21,13 @@ void yyerror(const char* s);
     struct Tree *node;
 }
 
-%type <node> program  expression expressions  section subsection subsubsection italic bold href hrule paragraph information endLine 
+%type <node> program  expression expressions  section subsection subsubsection italic bold href hrule paragraph information 
 
 %token SECTION
 %token SUBSECTION
 %token SUBSUBSECTION
 %token OB CB OSB CSB 
-%token BOLD ITALIC EOL
+%token BOLD ITALIC
 %token HRULE PAR HREF
 %token <data> DATA  
 %token <data> LINK
@@ -45,25 +36,35 @@ void yyerror(const char* s);
 program :   
     expressions
     {   
-        // struct Tree * node =$1;
-        printf("anything\n");
-        root=$1;
+        
+        struct Tree*node=new Tree;
+        node->data="PROGRAM BEGINING :- ";
+        $$=node;
+        node->next=$1;
+        root=$$;
     }
 ;
 expressions :
     expression expressions 
     {
-        struct Tree * exp =$1;
-        struct Tree * exps =$2;
-        exp->next=exps;
-        $$=exp;
-        printf("expressions : expression expressions\n");
+        $$ = $1;
+        $$->next = $2;
+
+        // printf("expressions : expression expressions\n");
     }
 
-|   %empty 
+|   expression 
     {
-        struct Tree * node =new Tree;
-        printf("empty : empty \n");
+        // struct Tree * node =new struct Tree;
+        // node->data="end";
+        // node->child=NULL;
+        // node->next=NULL;
+        // $$=node;
+        // struct Tree*node1=$2;
+        $$ = $1;
+        // $$->next = NULL;
+        // node->next=node1;
+        // printf("empty : empty \n");
     }
 
 expression :
@@ -75,70 +76,102 @@ expression :
 |   href 
 |   hrule 
 |   paragraph 
-|   information 
-|   endLine
+|   information
 ;
 
 
 section:
     SECTION OB information CB                  
     {
-        struct Tree * node=new Tree;
-        node->data="section";
-        node->child=$3;
-        node->next=NULL;
-        $$= node;
-        printf("section\n");
+        // struct Tree * node=new struct Tree;
+        // node->data="section";
+        // node->child=$3;
+        // node->next=NULL;
+        // $$= node;
+        // std::cout << "Section data: " << $3->data << std::endl; // Debug output
+        $$ = new struct Tree;
+        $$->data = "SECTION ";
+        $$->child = $3;
+        // printf("section\n");
     }
 ;
 subsection:
-    SUBSECTION OB DATA CB               {printf("##%s",$3);}
+    SUBSECTION OB information CB               
+    {
+        $$=new Tree;
+        $$->data="SUB-SECTION";
+        $$->child=$3;
+        //printf("##%s",$3);
+    }
 ;
 
 subsubsection :
-    SUBSUBSECTION OB DATA CB            {printf("##%s",$3);}
+    SUBSUBSECTION OB information CB               
+    {
+        $$=new Tree;
+        $$->data="SUB-SECTION";
+        $$->child=$3;
+        // printf("##%s",$3);
+    }
 ;
 italic :
-    ITALIC OB DATA CB                   {printf("*%s*",$3);}
+    ITALIC OB information CB                  
+    {
+        $$=new Tree;
+        $$->data="ITALIC";
+        $$->child=$3;
+        // printf("*%s*",$3);
+    }
 ;
 bold:
-    BOLD OB DATA CB                     {printf("** %s **",$3);}
+    BOLD OB information CB                    
+    {
+        $$=new Tree;
+        $$->data="BOLD";
+        $$->child=$3;
+        // printf("** %s **",$3);
+    }
 ;
 href:
-    HREF OB LINK CB OB DATA CB          {printf("[%s](%s)",$6,$3);}
+    HREF OB LINK CB OB information CB          
+     {
+        $$=new Tree;
+        $$->data=$3;
+        $$->child=$6;
+        // printf("[%s](%s)",$6,$3);
+    }
 ;
 hrule:
-    HRULE                               {printf("---");}
+    HRULE                              
+    {
+        $$=new Tree;
+        $$->data="HRULE";
+        // printf("---");
+    }
 ;
 paragraph:
-    PAR                                 {printf("\n");}
+    PAR                                
+    {
+        $$=new Tree;
+        $$->data="PAR";
+        // printf("\n");
+    }
 ;
 information:
     DATA                                
     {
-        struct Tree * node=new Tree;
-        node->data=$1;
-        node->child=NULL;
-        node->next=NULL;
-        $$= node;
-        printf("%s",$1);
+        $$=new struct Tree;
+        $$->data=$1;
+        $$->child=NULL;
+        $$->next=NULL;
+        // printf("%s",$1);
     }
 ;
-endLine:
-    EOL                                 {printf("\n");}
-; 
 
 
 %%
 
-int main(){
-    yyparse();
-    printTree(root);
-}
 
-void yyerror(const char* s){
-    printf("ERROR : %s \n",s);
-}
 /* program :
 |    expression program
 ;
