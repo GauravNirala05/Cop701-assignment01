@@ -1,9 +1,13 @@
+
 %{
 #include<stdio.h>
 #include "parser.tab.h"
 %}
 
+%option noyywrap
+
 %%
+
 "\\section"                 {return SECTION;}                              //{printf("#");}
 "\\subsection"              {return SUBSECTION;}                           //{printf("##");}
 "\\subsubsection"           {return SUBSUBSECTION;}   
@@ -22,3 +26,4 @@
 [ \t]                       {}
 
 %%
+
