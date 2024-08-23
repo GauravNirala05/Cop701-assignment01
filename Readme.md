@@ -36,6 +36,6 @@
 
 
 ## How To run code-
-1. cd into assignment01 
+1. cd into latex2mdConvertor 
 2. run- "make"
 3. run ./latex2md.out test.tex output.md
