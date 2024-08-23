@@ -34,6 +34,31 @@
 |   &
 |   \end{tabular}
 
+### File structure -->
+```
+latex2mdConvertor ( main directory )
+    |-> ast_tree/ [ABSTRACT_SYNTAX_TREE]
+    |       |-> ast.h (ast header file)
+    |       |-> ast.cpp
+    |
+    |->images/
+    |     |-> images.jpg
+    |
+    |-> src/  [SOURCE_FILES]
+    |    |-> lexer.l 
+    |    |-> parser.y
+    |
+    |->Traversor/ [SYNTAX_TO_SEMENTIC(markdown)]
+    |      |-> traverse.h (Traverse header file)
+    |      |-> traverse.cpp
+    |
+    |->   main.cpp [MAIN_FILE]
+    |
+    |->   Makefile [ALL necessory sequence of command]
+    |
+    |-> test.tex [TEST_FILE]
+
+```
 
 ## How To run code-
 1. cd into latex2mdConvertor 
