@@ -18,9 +18,10 @@
 |   \subsubsection
 |   \par
 |   \hrule
-|   \href
 |   \textbf
 |   \textit
+|   \includegraphics
+|   \href
 |   \begin{verbatim}               
 |   \end{verbatim}
 |   \begin{itemize}
