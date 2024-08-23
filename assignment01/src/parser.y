@@ -31,7 +31,7 @@ extern void yyerror(const char* s);
 %type <node> enumerator_start enumerator_end 
 %type <node> table_start table_end table_newline table_partition hline
      
-%token PREAMBLE FOOTER 
+%token PREAMBLE FOOTER
 %token SECTION SUBSECTION SUBSUBSECTION
 %token OB CB OSB CSB EOL
 %token BOLD ITALIC NEWLINE
