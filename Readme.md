@@ -6,6 +6,7 @@ The features(tags) of LaTeX considered:-
     
     \section
     \subsection
+    \subsubsection
     \par
     \label
     \ref

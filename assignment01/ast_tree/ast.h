@@ -17,7 +17,20 @@ enum D_TYPE{
     D_BOLD,
     D_HRULE,
     D_PAR,
+    D_VERBATIM_START,
+    D_VERBATIM_END,
+    D_ITEM_START,
+    D_ITEM_END,
+    D_ENUM_START,
+    D_ENUM_END,
+    D_TABLE_START,
+    D_TABLE_END,
+    D_TABLE_NEWLINE,
+    D_TABLE_PART,
+    D_TABLE_HLINE,
     D_NEWLINE,
+    D_GRAPHIC,
+    // D_EOL,
     D_INFORMATION
 };
 
@@ -29,6 +42,6 @@ typedef struct Tree{
     struct Tree* next;
 }Tree;
 
-void printTree(Tree*,int);
+void printTree(Tree*);
 
 #endif

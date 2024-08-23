@@ -4,23 +4,22 @@
 
 using namespace std;
 
-void printTree(Tree *head, int countNode)
+void printTree(Tree *head)
 {
     if (head != NULL)
     {
-        cout << head->data << " : " << "countNode : " << countNode << endl;
+        cout << head->data << " : "  << endl;
 
         if (head->child)
         {
             cout << "child of " << head->data << " : \n\t";
-            printTree(head->child, countNode);
+            printTree(head->child);
         }
         if (head->next)
         {
             cout << "next of " << head->data << " : \n\t";
-            printTree(head->next, countNode);
+            printTree(head->next);
         }
-        countNode++;
     }
     else
     {
