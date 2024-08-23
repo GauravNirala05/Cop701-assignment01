@@ -19,7 +19,7 @@ print("Explore the world-class research and academic programs.")
 ```
 For more information, visit the official IIT Delhi website: [IIT Delhi Official Website](https://www.iitd.ac.in)
 
-![IIT Delhi Campus](TestCase/images/technology.jpg)
+![IIT Delhi Campus](images/technology.jpg)
 
 - Established: 1961
 - Location: Hauz Khas, New Delhi
