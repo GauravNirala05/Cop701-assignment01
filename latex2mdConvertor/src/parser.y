@@ -33,7 +33,7 @@ extern void yyerror(const char* s);
      
 %token PREAMBLE FOOTER
 %token SECTION SUBSECTION SUBSUBSECTION
-%token OB CB OSB CSB EOL
+%token OB CB //OSB CSB EOL
 %token BOLD ITALIC NEWLINE
 %token HRULE PAR HREF
 %token PUSH_START PUSH_END
