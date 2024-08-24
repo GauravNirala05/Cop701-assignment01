@@ -56,7 +56,16 @@ latex2mdConvertor ( main directory )
     |
     |->   Makefile [ALL necessory sequence of command]
     |
-    |-> test.tex [TEST_FILE]
+    |->   test.tex [TEST_FILE]
+    |
+    |->   googletest/ [gtest tools e.g. lgtest lgtest_main]
+    |
+    |->   lexer.o    [used for gtest]
+    |->   parser.o   [used for gtest]
+    |->   traverse.o [used for gtest]
+    |
+    |->   test.cpp   [MIAN TESTING file]
+    |->   test       [output file of gtest]
 
 ```
 
@@ -64,3 +73,13 @@ latex2mdConvertor ( main directory )
 1. cd into latex2mdConvertor 
 2. run- "make"
 3. run ./latex2md.out test.tex output.md
+
+## How To run gtest -
+1. cd into latex2mdConvertor 
+2. run- "flex src/lexer.l"
+3. run- "bison -d src/parser.y"
+4. run- "g++ -c lex.yy.c -o lexer.o "
+5. run- "g++ -c parser.tab.c -o parser.o "
+6. run- "g++ -c Traversor/traverse.cpp -o traverse.o"
+7. run- "g++ test.cpp lexer.o parser.o traverse.o -lgtest -lgtest_main -o test"
+8. run ./test
