@@ -37,9 +37,9 @@
 "]"                                     {return CSB;}      
 "{"                                     {return OB;}                                  
 "}"                                     {return CB;}  
-[a-z]+[:][/]{2}[a-z.]*                             {yylval.data = strdup(yytext); return LINK;}
+[a-z]+[:][/]{2}[a-z.]*                            {yylval.data = strdup(yytext); return LINK;}
 [a-zA-Z0-9()\[\],.-?<>;:'"\/!@#$%^*_+=\- ]+       {yylval.data = strdup(yytext); return DATA;}  //printf("data : %s",yytext);
-[\n][\n]                                {return NEWLINE;}       // [\n]                        {return EOL;}
+[\n][\n]                                 {return NEWLINE;}       // [\n]                        {return EOL;}
 [ \n\t]+                                {}
 .                                       {}
 %%

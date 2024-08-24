@@ -12,10 +12,3 @@ gtest:
 	g++ -c Traversor/traverse.cpp -o traverse.o
 	g++ test.cpp lexer.o parser.o traverse.o -lgtest -lgtest_main -o gtest_result
 	rm lex.yy.c parser.tab.h parser.tab.c lexer.o parser.o traverse.o
-
-
-
-
-
-
-

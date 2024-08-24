@@ -91,6 +91,8 @@ preheaders :
         $$ = new Tree;
         $$->data=$1;
     }
+
+|   newline
 ;
 expressions :
     expression expressions 
@@ -363,7 +365,7 @@ newline:
         $$=new struct Tree;
         $$->dtype=D_NEWLINE;
         $$->data= "newline";
-        $$->child=NULL;
+        // $$->child=NULL;
         // printf("%s",$1);
     }
 ;
