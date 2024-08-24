@@ -22,6 +22,7 @@ int main(int arg, char *args[])
 {
     if (arg < 3)
     {
+        cout<<arg;
         std::cout << "ERROR : Enter 3 args to run --> <compiler> and <input_file.tex> and <output_file.md> \n\t\t--> (e.g ./latex2md.out test.tex output.md)\n";
         return 0;
     }
