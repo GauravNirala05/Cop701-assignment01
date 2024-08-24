@@ -207,7 +207,7 @@ bold:
 href:
     HREF OB LINK CB OB information CB          
     {
-        printf("its running ");
+        // printf("its running ");
         $$=new Tree;
         $$->dtype=D_HREF;
         $$->data=$3;
