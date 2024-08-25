@@ -72,7 +72,6 @@ latex2mdConvertor ( main directory )
 1. cd into latex2mdConvertor 
 2. run- "make compiler"
 3. run ./latex2md.out test.tex output.md
-4. 
 
 ## How To run gtest -
 1. cd into latex2mdConvertor 
